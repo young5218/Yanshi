@@ -1,0 +1,60 @@
+<html>
+<head>
+    <title>订单管理</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta http-equiv="pragma" content="no-cache">
+    <meta http-equiv="cache-control" content="no-cache">
+    <meta http-equiv="expires" content="0">
+    <meta http-equiv="keywords" content="keyword1,keyword2,keyword3">
+    <meta http-equiv="description" content="ajax方式">
+     <script src="http://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
+     <script type="text/javascript">
+        function deleteorder() {
+            $.ajax({
+            //几个参数需要注意一下
+                type: "POST",//方法类型
+                dataType: "json",//预期服务器返回的数据类型
+                url: "http://localhost:8080/Yanshi/order" ,
+                data: $('#form1').serialize(),
+                success: function (result) {
+                    console.log(result);//打印服务端返回的数据(调试用)
+                        alert("删除成功");
+                    ;
+                },
+                error : function() {
+                    alert("异常！");
+                }
+            });
+        }
+    </script>
+    
+    <style>
+        #order_div{
+            border: 1px red solid;
+        }
+    </style>
+    
+</head>
+<body>
+<h1>订单管理页面：</h1>
+<div id="order_div">
+<div>
+订单编号：1f94f6fb9-68c1-41d9-b5cc-f6fa4bcc8032<br/>
+商品名称：电脑<br/>
+单价（元）：10000<br/>
+数量（个）：99<br/>
+总价（元）：990000<br/>
+</div>
+ <form id="form1" onsubmit="return false" action="##" method="post">
+        <input name="opt_type" type="hidden"  tabindex="1" size="15" value="order_delete"/>
+        <input name="pru_type" type="hidden" id="pru_type_I" tabindex="1" size="15" value="1"/>
+        <input name="orderid" type="hidden"  tabindex="1" size="15" value="1f94f6fb9-68c1-41d9-b5cc-f6fa4bcc8032"/>
+        <input type="button" value="删除" onclick="deleteorder()">
+    </form>
+     <form id="form2" onsubmit="return false" action="##" method="post">
+       <input type="button" value="付款" onclick="pay()">
+    </form>
+</div>
+
+</body>
+</html>
